@@ -6,7 +6,7 @@
 
 :root {
     --color-white:#fff;
-    --color-main:#b1701b;
+    --color-main:#d6a70c;
     --color-blue:#002f75;
 }
 
@@ -16,6 +16,8 @@ body {
     flex-direction: column;
     
 }
+
+/*------------------ Header ------------------*/
 
 header {
     background-color: var(--color-main);
@@ -55,6 +57,8 @@ nav {
     gap: 2em;
 }
 
+/*------------------ contener ------------------*/
+
 .contener-main {
     display: flex;
     align-items: center;
@@ -89,4 +93,101 @@ nav {
     align-items: center;
     margin: 1vh;
     font-weight: bold;
+    color: var(--color-blue);
+}
+
+/*------------------ Botão padrão ------------------*/
+
+.btn {
+    border-radius: 10px;
+    border-width: 0;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    width: 16vh;
+    height: 5vh;
+}
+
+/*------------------ Adição de servisos ------------------*/
+
+.oculto {
+    display: none;
+}
+
+.addSevisos {
+    display: none;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-blue);
+    border-radius: 10px;
+    color: var(--color-white);
+}
+
+.addSevisos.oculto {
+    display: flex;
+}
+
+.addSevisos form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.addSevisos h3{
+    margin: 3vh;
+}
+
+.addSevisos label {
+    margin-top: 2vh;
+}
+
+.bntadd {
+    display: flex;
+    justify-content: center;
+
+}
+
+.bntadd .btn{
+    background-color: var(--color-white);
+    width: 8vh;
+    height: 3vh;
+    margin: 2vh;
+    color: var(--color-blue);
+}
+
+/*------------------ PAGINA DA CALCULADORA ------------------*/
+
+.contener-calculadora{
+    background-color: var(--color-main);
+    width: 80%;
+    min-height: 20em;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px var(--color-black);
+    margin: 30px;
+    padding: 20px;
+
+}
+
+
+.contener-calculadora .areabnt {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.bntn {
+    border-radius: 10px;
+    border-width: 0;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    width: 10vh;
+    height: 5vh;
+
+    flex-wrap: wrap;
+
 }
