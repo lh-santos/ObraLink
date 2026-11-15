@@ -191,3 +191,85 @@ nav {
     flex-wrap: wrap;
 
 }
+
+
+/* ===== Calculadora (autônomo e reforçado contra regras antigas do style.css) ===== */
+section.contener-calculadora,
+section.contener-calculadora * {
+    box-sizing: border-box;
+}
+
+section.contener-calculadora {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 18px;
+    background: #ffffff;
+    border: 2px solid #c8d1da;
+    border-radius: 12px;
+}
+
+section.contener-calculadora #meuInput {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 14px;
+    padding: 14px;
+    font: inherit;
+    font-size: 2rem;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: #1c2733;
+    background: #f8fafb;
+    border: 2px solid #c8d1da;
+    border-radius: 8px;
+}
+
+section.contener-calculadora .areabnt {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+section.contener-calculadora .areabnt .bntn {
+    width: 100%;
+    height: auto;
+    min-height: 58px;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1c2733;
+    background: #ffffff;
+    border: 2px solid #c8d1da;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+section.contener-calculadora .areabnt .bntn:hover { background: #eef2f6; }
+section.contener-calculadora .areabnt .bntn:active { background: #dfe6ed; }
+
+section.contener-calculadora .bntn:focus-visible,
+section.contener-calculadora #meuInput:focus-visible {
+    outline: 3px solid #f4b400;
+    outline-offset: 2px;
+}
+
+section.contener-calculadora .areabnt .bntn.bntn-op { background: #e6eef6; border-color: #b6c8da; color: #1f4e79; }
+section.contener-calculadora .areabnt .bntn.bntn-limpar { color: #a12a2a; }
+section.contener-calculadora .areabnt .bntn.bntn-igual { grid-row: span 2; background: #f4b400; border-color: #c99700; }
+section.contener-calculadora .areabnt .bntn.bntn-igual:hover { background: #ffc61f; }
+section.contener-calculadora .areabnt .bntn.bntn-zero { grid-column: span 2; }
+
+@media (max-width: 520px) {
+    section.contener-calculadora { padding: 14px; }
+    section.contener-calculadora #meuInput { font-size: 1.6rem; }
+}
