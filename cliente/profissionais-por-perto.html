@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profissionais por perto | ObraLink</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/funcionalidades.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="marca">
+            <img src="icones/08560e44-7619-4032-a3a6-54a197e1a773.png" alt="Logotipo do ObraLink">
+            <h1>ObraLink</h1>
+        </a>
+
+        <nav aria-label="Navegação principal">
+            <a href="index.html" class="link">Início</a>
+            <a href="header-links/historico.html" class="link">Histórico</a>
+            <a href="header-links/perfil.html" class="link">Perfil</a>
+        </nav>
+    </header>
+
+    <main class="pagina">
+        <h2 class="titulo-pagina">Profissionais por perto</h2>
+        <p class="texto-apoio">Encontre eletricistas, pintores e pedreiros perto de você e solicite uma visita técnica.</p>
+
+        <form class="barra-filtros" aria-label="Filtrar profissionais" onsubmit="return false">
+            <div class="campo">
+                <label for="filtroOficio">Ofício</label>
+                <select id="filtroOficio">
+                    <option value="">Todos</option>
+                    <option value="eletricista">Eletricista</option>
+                    <option value="pintor">Pintor</option>
+                    <option value="pedreiro">Pedreiro</option>
+                </select>
+            </div>
+        </form>
+
+        <p class="contagem" id="contagem" aria-live="polite"></p>
+
+        <!-- EXEMPLOS: substitua pelos profissionais reais (dados vindos do cadastro/Perfil) -->
+        <section class="lista-profissionais" id="listaProfissionais" aria-label="Lista de profissionais">
+            <article class="cartao-profissional" data-oficio="eletricista">
+                <div class="topo-cartao">
+                    <span class="avatar" aria-hidden="true">AS</span>
+                    <div>
+                        <h3>Anderson Souza</h3>
+                        <p class="oficio">Eletricista</p>
+                    </div>
+                    <span class="selo selo-disponivel">Disponível</span>
+                </div>
+
+                <ul class="dados">
+                    <li>A 2 km de você</li>
+                    <li>Contato: (00) 00000-0000</li>
+                </ul>
+
+                <div class="acoes-cartao">
+                    <a class="botao botao-secundario" href="#">Ver perfil</a>
+                </div>
+
+                <details class="visita">
+                    <summary>Solicitar visita técnica</summary>
+                    <form class="form-visita" action="#" method="post">
+                        <div class="campo">
+                            <label for="data1">Data desejada</label>
+                            <input type="date" id="data1" name="data" required>
+                        </div>
+                        <div class="campo">
+                            <label for="periodo1">Período</label>
+                            <select id="periodo1" name="periodo">
+                                <option>Manhã</option>
+                                <option>Tarde</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="descricao1">O que precisa ser feito?</label>
+                            <textarea id="descricao1" name="descricao" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="botao">Enviar solicitação</button>
+                    </form>
+                </details>
+            </article>
+            <article class="cartao-profissional" data-oficio="pintor">
+                <div class="topo-cartao">
+                    <span class="avatar" aria-hidden="true">MP</span>
+                    <div>
+                        <h3>Marcos Pereira</h3>
+                        <p class="oficio">Pintor</p>
+                    </div>
+                    <span class="selo selo-em-obra">Em obra</span>
+                </div>
+
+                <ul class="dados">
+                    <li>A 4 km de você</li>
+                    <li>Contato: (00) 00000-0000</li>
+                </ul>
+
+                <div class="acoes-cartao">
+                    <a class="botao botao-secundario" href="#">Ver perfil</a>
+                </div>
+
+                <details class="visita">
+                    <summary>Solicitar visita técnica</summary>
+                    <form class="form-visita" action="#" method="post">
+                        <div class="campo">
+                            <label for="data2">Data desejada</label>
+                            <input type="date" id="data2" name="data" required>
+                        </div>
+                        <div class="campo">
+                            <label for="periodo2">Período</label>
+                            <select id="periodo2" name="periodo">
+                                <option>Manhã</option>
+                                <option>Tarde</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="descricao2">O que precisa ser feito?</label>
+                            <textarea id="descricao2" name="descricao" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="botao">Enviar solicitação</button>
+                    </form>
+                </details>
+            </article>
+            <article class="cartao-profissional" data-oficio="pedreiro">
+                <div class="topo-cartao">
+                    <span class="avatar" aria-hidden="true">JL</span>
+                    <div>
+                        <h3>José Lima</h3>
+                        <p class="oficio">Pedreiro</p>
+                    </div>
+                    <span class="selo selo-disponivel">Disponível</span>
+                </div>
+
+                <ul class="dados">
+                    <li>A 5 km de você</li>
+                    <li>Contato: (00) 00000-0000</li>
+                </ul>
+
+                <div class="acoes-cartao">
+                    <a class="botao botao-secundario" href="#">Ver perfil</a>
+                </div>
+
+                <details class="visita">
+                    <summary>Solicitar visita técnica</summary>
+                    <form class="form-visita" action="#" method="post">
+                        <div class="campo">
+                            <label for="data3">Data desejada</label>
+                            <input type="date" id="data3" name="data" required>
+                        </div>
+                        <div class="campo">
+                            <label for="periodo3">Período</label>
+                            <select id="periodo3" name="periodo">
+                                <option>Manhã</option>
+                                <option>Tarde</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="descricao3">O que precisa ser feito?</label>
+                            <textarea id="descricao3" name="descricao" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="botao">Enviar solicitação</button>
+                    </form>
+                </details>
+            </article>
+        </section>
+
+        <p class="sem-resultados" id="semResultados" hidden>Nenhum profissional encontrado para este ofício.</p>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

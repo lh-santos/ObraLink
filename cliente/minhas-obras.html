@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas obras e relatórios | ObraLink</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/funcionalidades.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="marca">
+            <img src="icones/08560e44-7619-4032-a3a6-54a197e1a773.png" alt="Logotipo do ObraLink">
+            <h1>ObraLink</h1>
+        </a>
+
+        <nav aria-label="Navegação principal">
+            <a href="index.html" class="link">Início</a>
+            <a href="header-links/historico.html" class="link">Histórico</a>
+            <a href="header-links/perfil.html" class="link">Perfil</a>
+        </nav>
+    </header>
+
+    <main class="pagina">
+        <h2 class="titulo-pagina">Minhas obras e relatórios</h2>
+        <p class="texto-apoio">Acompanhe o andamento das obras em aberto e baixe os relatórios em PDF.</p>
+
+        <h3 class="secao-titulo">Obras em andamento</h3>
+
+        <section class="lista-obras" aria-label="Obras em andamento">
+            <article class="cartao-obra">
+                <div class="topo-obra">
+                    <h3>Instalação elétrica da cozinha</h3>
+                    <span class="selo selo-andamento">Em andamento</span>
+                </div>
+                <ul class="meta-obra">
+                    <li><strong>Profissional:</strong> Anderson Souza (Eletricista)</li>
+                    <li><strong>Prazo previsto:</strong> 20/12/2026</li>
+                </ul>
+                <div class="andamento">
+                    <label for="progresso1">Andamento: 60%</label>
+                    <progress id="progresso1" value="60" max="100">60%</progress>
+                </div>
+                <div class="acoes-cartao">
+                    <a class="botao" href="#">Ver detalhes</a>
+                    <a class="botao botao-secundario" href="#" download>Baixar relatório (PDF)</a>
+                </div>
+            </article>
+
+            <article class="cartao-obra">
+                <div class="topo-obra">
+                    <h3>Pintura da sala e dos quartos</h3>
+                    <span class="selo selo-andamento">Visita agendada</span>
+                </div>
+                <ul class="meta-obra">
+                    <li><strong>Profissional:</strong> Marcos Pereira (Pintor)</li>
+                    <li><strong>Visita técnica:</strong> 25/11/2026, manhã</li>
+                </ul>
+                <div class="andamento">
+                    <label for="progresso2">Andamento: 0%</label>
+                    <progress id="progresso2" value="0" max="100">0%</progress>
+                </div>
+                <div class="acoes-cartao">
+                    <a class="botao" href="#">Ver detalhes</a>
+                </div>
+            </article>
+        </section>
+
+        <h3 class="secao-titulo">Relatórios</h3>
+
+        <ul class="lista-relatorios">
+            <li>
+                <div class="info-relatorio">
+                    <strong>Instalação elétrica da cozinha</strong>
+                    <span>Relatório parcial em PDF</span>
+                </div>
+                <a class="botao botao-secundario" href="#" download>Baixar PDF</a>
+            </li>
+        </ul>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

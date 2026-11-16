@@ -193,7 +193,7 @@ nav {
 }
 
 
-/* ===== Calculadora (autônomo e reforçado contra regras antigas do style.css) ===== */
+/* ===== Calculadora ===== */
 section.contener-calculadora,
 section.contener-calculadora * {
     box-sizing: border-box;
@@ -272,4 +272,174 @@ section.contener-calculadora .areabnt .bntn.bntn-zero { grid-column: span 2; }
 @media (max-width: 520px) {
     section.contener-calculadora { padding: 14px; }
     section.contener-calculadora #meuInput { font-size: 1.6rem; }
+}
+
+
+
+/*----------------------------------------------------*/
+
+/*------------------ Títulos das páginas ------------------*/
+
+.titulo-pagina {
+    width: 80%;
+    margin: 30px 0 5px;
+    color: var(--color-blue);
+}
+
+.subtitulo-pagina {
+    width: 80%;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/*------------------ Abas (Minhas obras / Concluídas / Relatório) ------------------*/
+
+.abas {
+    width: 80%;
+    display: flex;
+    gap: 1em;
+    margin-top: 10px;
+}
+
+.abas a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--color-blue);
+    padding: 1vh 2vh;
+    border-radius: 10px;
+    background-color: #00000015;
+}
+
+.abas a.ativa {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+/*------------------ Lista de cartões (obras e clientes) ------------------*/
+
+.contener.cards {
+    gap: 20px;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.card {
+    background-color: var(--color-white);
+    color: #1c2733;
+    flex: 1 1 260px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px;
+    border-radius: 10px;
+    border: 2px solid var(--color-blue);
+}
+
+.card h3 {
+    color: var(--color-blue);
+}
+
+.card h4 {
+    margin-top: 6px;
+    color: var(--color-blue);
+}
+
+.card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.info {
+    font-size: 0.95rem;
+}
+
+/* Botão dentro do cartão (sobrescreve o estilo de ".contener a") */
+.card .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 6px 0 0;
+    text-decoration: none;
+    color: var(--color-white);
+}
+
+.card .btn.btn-claro {
+    background-color: var(--color-white);
+    color: var(--color-blue);
+    border: 2px solid var(--color-blue);
+}
+
+/*------------------ Status ------------------*/
+
+.status {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.status-andamento { background-color: #e6eef6; color: #1f4e79; }
+.status-atencao   { background-color: #fbe3e3; color: #a12a2a; }
+.status-concluida { background-color: #e1f3e4; color: #1e6b2e; }
+
+/*------------------ Barra de progresso ------------------*/
+
+.progresso {
+    width: 100%;
+    height: 10px;
+    background-color: #dfe6ed;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-barra {
+    height: 100%;
+    background-color: var(--color-main);
+    border-radius: 10px;
+}
+
+/*------------------ Materiais ------------------*/
+
+.lista-materiais {
+    padding-left: 18px;
+    font-size: 0.9rem;
+}
+
+/*------------------ Avatar do cliente ------------------*/
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/*------------------ Estrelas de avaliação ------------------*/
+
+.estrelas {
+    font-size: 1.4rem;
+    color: var(--color-main);
+}
+
+/*------------------ Celular ------------------*/
+
+@media (max-width: 520px) {
+    .card {
+        max-width: 100%;
+    }
+
+    .abas {
+        flex-wrap: wrap;
+    }
 }

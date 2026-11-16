@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora | ObraLink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="marca">
+            <img src="icones/08560e44-7619-4032-a3a6-54a197e1a773.png" alt="Logotipo do ObraLink">
+            <h1>ObraLink</h1>
+        </a>
+
+        <nav aria-label="Navegação principal">
+            <a href="index.html" class="link">Início</a>
+            <a href="header-links/historico.html" class="link">Histórico</a>
+            <a href="header-links/status.html" class="link">Meu status</a>
+            <a href="header-links/perfil.html" class="link">Perfil</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="titulo-pagina">Calculadora</h2>
+
+        <section class="contener-main pagina-unica">
+            <section class="contener-calculadora" aria-label="Calculadora">
+                <input type="text" id="meuInput" readonly inputmode="none" aria-label="Visor da calculadora" placeholder="0">
+
+                <div class="areabnt">
+                    <button type="button" class="bntn bntn-limpar" onclick="limpar()" aria-label="Limpar tudo">C</button>
+                    <button type="button" class="bntn bntn-op" onclick="apagar()" aria-label="Apagar último caractere">⌫</button>
+                    <button type="button" class="bntn bntn-op" onclick="adicionarCaractere('÷')" aria-label="Dividir">÷</button>
+                    <button type="button" class="bntn bntn-op" onclick="adicionarCaractere('×')" aria-label="Multiplicar">×</button>
+
+                    <button type="button" class="bntn" onclick="adicionarCaractere('7')">7</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('8')">8</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('9')">9</button>
+                    <button type="button" class="bntn bntn-op" onclick="adicionarCaractere('-')" aria-label="Subtrair">−</button>
+
+                    <button type="button" class="bntn" onclick="adicionarCaractere('4')">4</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('5')">5</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('6')">6</button>
+                    <button type="button" class="bntn bntn-op" onclick="adicionarCaractere('+')" aria-label="Somar">+</button>
+
+                    <button type="button" class="bntn" onclick="adicionarCaractere('1')">1</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('2')">2</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere('3')">3</button>
+                    <button type="button" class="bntn bntn-igual" onclick="calcular()" aria-label="Calcular resultado">=</button>
+
+                    <button type="button" class="bntn bntn-zero" onclick="adicionarCaractere('0')">0</button>
+                    <button type="button" class="bntn" onclick="adicionarCaractere(',')" aria-label="Vírgula">,</button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
