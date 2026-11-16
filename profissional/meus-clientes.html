@@ -1,21 +1,25 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ObraLink - Meus clientes</title>
+    <title>Meus clientes | ObraLink</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
-        <a href="inicio.html">
-            <img src="img/logo.png" alt="Logo ObraLink">
+        <a href="index.html" class="marca">
+            <img src="icones/logo.png" alt="Logo ObraLink">
             <h1>ObraLink</h1>
         </a>
+
         <nav>
-            <a class="link" href="inicio.html">Início</a>
-            <a class="link" href="status.html">Meus status</a>
-            <a class="link" href="perfil.html">Perfil</a>
+            <a href="index.html" class="link">Início</a>
+            <a href="header-links/historico.html" class="link">Histórico</a>
+            <a href="header-links/status.html" class="link">Meu status</a>
+            <a href="header-links/perfil.html" class="link">Perfil</a>
         </nav>
     </header>
 
@@ -23,36 +27,21 @@
         <h2 class="titulo-pagina">Meus clientes</h2>
         <p class="subtitulo-pagina">Clientes com obras em aberto</p>
 
-        <section class="contener cards">
+        <section class="contener pagina-unica">
+            <form id="formCliente" class="formulario">
+                <h3>Cadastrar cliente</h3>
 
-            <article class="card">
-                <div class="avatar">MS</div>
-                <h3>Maria Souza</h3>
-                <p class="info"><strong>Telefone:</strong> (75) 99999-1111</p>
-                <p class="info"><strong>Obras em aberto:</strong> 1</p>
-                <p class="info"><strong>Próximo prazo:</strong> 30/11/2026</p>
-                <a class="btn" href="obras.html">Ver obras</a>
-            </article>
+                <label for="clienteNome">Nome</label>
+                <input type="text" id="clienteNome" placeholder="Nome do cliente" required>
 
-            <article class="card">
-                <div class="avatar">JP</div>
-                <h3>João Pereira</h3>
-                <p class="info"><strong>Telefone:</strong> (75) 99999-2222</p>
-                <p class="info"><strong>Obras em aberto:</strong> 1</p>
-                <p class="info"><strong>Próximo prazo:</strong> 10/11/2026</p>
-                <a class="btn" href="obras.html">Ver obras</a>
-            </article>
+                <label for="clienteTelefone">Telefone</label>
+                <input type="tel" id="clienteTelefone" placeholder="(75) 99999-9999" required>
 
-            <article class="card">
-                <div class="avatar">CL</div>
-                <h3>Carlos Lima</h3>
-                <p class="info"><strong>Telefone:</strong> (75) 99999-3333</p>
-                <p class="info"><strong>Obras em aberto:</strong> 2</p>
-                <p class="info"><strong>Próximo prazo:</strong> 20/12/2026</p>
-                <a class="btn" href="obras.html">Ver obras</a>
-            </article>
-
+                <button type="submit" class="btn">Cadastrar cliente</button>
+            </form>
         </section>
+
+        <section class="contener cards" id="listaClientes"></section>
     </main>
 </body>
 </html>

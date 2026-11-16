@@ -96,6 +96,67 @@ nav {
     color: var(--color-blue);
 }
 
+
+/* Atalhos da página inicial */
+
+.atalhos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 25px;
+    align-items: stretch;
+}
+
+.atalhos a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    min-height: 150px;
+    padding: 20px;
+
+    color: var(--color-blue);
+    background-color: var(--color-white);
+
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.atalhos a svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--color-blue);
+}
+
+.atalhos a:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+    .atalhos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .atalhos {
+        grid-template-columns: 1fr;
+    }
+}
+
 /*------------------ Botão padrão ------------------*/
 
 .btn {
@@ -274,10 +335,6 @@ section.contener-calculadora .areabnt .bntn.bntn-zero { grid-column: span 2; }
     section.contener-calculadora #meuInput { font-size: 1.6rem; }
 }
 
-
-
-/*----------------------------------------------------*/
-
 /*------------------ Títulos das páginas ------------------*/
 
 .titulo-pagina {
@@ -441,5 +498,133 @@ section.contener-calculadora .areabnt .bntn.bntn-zero { grid-column: span 2; }
 
     .abas {
         flex-wrap: wrap;
+    }
+}
+
+
+/* ===== Formulários ===== */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-radius: 10px;
+}
+
+.formulario h3 {
+    margin-bottom: 10px;
+}
+
+.formulario label {
+    font-weight: bold;
+}
+
+.formulario input,
+.formulario select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+
+.formulario .btn {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ===== Tabelas ===== */
+
+.tabela-container {
+    overflow-x: auto;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--color-blue);
+    color: white;
+}
+
+.btn-remover {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #a12a2a;
+    color: white;
+    cursor: pointer;
+    margin: 3px;
+}
+
+td .btn {
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* ===== Relatórios ===== */
+
+.relatorio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: white;
+    color: #1c2733;
+}
+
+.relatorio article {
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pagina-unica {
+    align-items: center;
+}
+
+#addP {
+    cursor: pointer;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #relatorio,
+    #relatorio * {
+        visibility: visible;
+    }
+
+    #relatorio {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        border: none;
     }
 }
