@@ -269,3 +269,231 @@ document.querySelectorAll(
 // INICIAR PÁGINA
 
 filtrarProfissionais();
+
+
+// =====================================
+// MINHAS OBRAS - OBRALINK
+// =====================================
+
+
+// BOTÃO VER DETALHES
+
+const botoesDetalhes = document.querySelectorAll(
+    ".acoes-cartao a:first-child"
+);
+
+botoesDetalhes.forEach(botao => {
+
+    botao.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const cartao = botao.closest(".cartao-obra");
+
+        let detalhes = cartao.querySelector(".detalhes-obra");
+
+        if (!detalhes) {
+
+            detalhes = document.createElement("div");
+
+            detalhes.classList.add("detalhes-obra");
+
+            const titulo = cartao.querySelector(
+                ".topo-obra h3"
+            ).textContent;
+
+            const informacoes = cartao.querySelector(
+                ".meta-obra"
+            ).innerHTML;
+
+            const progresso = cartao.querySelector("progress");
+
+            const percentual = progresso.value;
+
+            detalhes.innerHTML = `
+                <h4>Detalhes da obra</h4>
+
+                <p><strong>Serviço:</strong> ${titulo}</p>
+
+                <ul>${informacoes}</ul>
+
+                <p><strong>Progresso:</strong> ${percentual}%</p>
+            `;
+
+            detalhes.hidden = true;
+
+            cartao.appendChild(detalhes);
+        }
+
+        detalhes.hidden = !detalhes.hidden;
+
+        botao.textContent = detalhes.hidden
+            ? "Ver detalhes"
+            : "Ocultar detalhes";
+
+    });
+
+});
+
+// =====================================
+// GERAR RELATÓRIO EM PDF
+// =====================================
+
+function baixarRelatorio(cartao) {
+
+    const titulo = cartao.querySelector(
+        ".topo-obra h3"
+    ).textContent;
+
+    const status = cartao.querySelector(
+        ".selo"
+    ).textContent;
+
+    const informacoes = cartao.querySelector(
+        ".meta-obra"
+    ).innerText;
+
+    const progresso = cartao.querySelector("progress");
+
+    const percentual = progresso.value;
+
+    const janela = window.open("", "_blank");
+
+    if (!janela) {
+        alert("Permita a abertura de janelas pop-up para gerar o PDF.");
+        return;
+    }
+
+    const escapar = texto => texto.replace(
+        /[&<>"']/g,
+        caractere => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[caractere]
+    );
+
+    janela.document.write(`
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <title>Relatório ObraLink</title>
+
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 35px;
+                    color: #333;
+                }
+
+                h1 {
+                    color: #002f75;
+                    border-bottom: 3px solid #d6a000;
+                    padding-bottom: 12px;
+                }
+
+                h2 {
+                    color: #002f75;
+                }
+
+                .caixa {
+                    border: 1px solid #ddd;
+                    padding: 20px;
+                    border-radius: 8px;
+                    margin-top: 20px;
+                }
+
+                .progresso {
+                    background: #ddd;
+                    height: 12px;
+                    border-radius: 20px;
+                    overflow: hidden;
+                }
+
+                .barra {
+                    background: #002f75;
+                    height: 12px;
+                    width: ${percentual}%;
+                }
+
+                footer {
+                    margin-top: 50px;
+                    text-align: center;
+                    color: #777;
+                }
+            </style>
+        </head>
+
+        <body>
+
+            <h1>ObraLink</h1>
+
+            <p>Relatório de acompanhamento de obra.</p>
+
+            <div class="caixa">
+
+                <h2>${escapar(titulo)}</h2>
+
+                <p><strong>Status:</strong> ${escapar(status)}</p>
+
+                <p><strong>Informações:</strong></p>
+
+                <p>${escapar(informacoes).replace(/\n/g, "<br>")}</p>
+
+                <p><strong>Andamento:</strong> ${percentual}%</p>
+
+                <div class="progresso">
+                    <div class="barra"></div>
+                </div>
+
+            </div>
+
+            <footer>
+                © 2026 ObraLink. Todos os direitos reservados.
+            </footer>
+
+        </body>
+        </html>
+    `);
+
+    janela.document.close();
+
+    janela.onload = function() {
+        janela.focus();
+        janela.print();
+    };
+
+}
+
+// =====================================
+// BOTÕES DE BAIXAR RELATÓRIO
+// =====================================
+
+const botoesRelatorios = document.querySelectorAll(
+    ".acoes-cartao a.botao-secundario, .lista-relatorios a.botao"
+);
+
+botoesRelatorios.forEach(botao => {
+
+    botao.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        let cartao = botao.closest(".cartao-obra");
+
+        if (!cartao) {
+            cartao = document.querySelector(".cartao-obra");
+        }
+
+        if (cartao) {
+            baixarRelatorio(cartao);
+        }
+
+    });
+
+});
+
+console.log("Minhas obras carregada com sucesso!");

@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Média de preços | ObraLink</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/funcionalidades.css">
     <link rel="icon" type="image/x-icon" href="icones/favicon-32x32.png">
 </head>
+
 <body>
     <header>
         <a href="index.html" class="logo">
-            <img src="icones/logo.png" alt="Logotipo do ObraLink">
+            <img src="icones/logo.png" alt="Logo ObraLink">
             <h1>ObraLink</h1>
         </a>
 
@@ -21,31 +23,140 @@
         </nav>
     </header>
 
-    <main class="pagina">
-        <h2 class="titulo-pagina">Média de preços</h2>
-        <p class="texto-apoio">Consulte valores de referência de serviços e materiais para comparar com os orçamentos que você receber.</p>
+    <main class="pagina-precos">
 
-        <section class="painel" aria-label="Preços de referência">
-            <div class="tabela-rolagem">
-                <table>
-                    <caption class="sr-only">Preços médios de referência</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Serviço ou material</th>
-                            <th scope="col">Unidade</th>
-                            <th scope="col">Preço médio (R$)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="3" class="vazio">Nenhum preço de referência disponível ainda.</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <h2 class="titulo-pagina">Média de preços</h2>
+
+        <p class="texto-apoio">
+            Consulte valores aproximados de serviços e planeje melhor sua obra.
+        </p>
+        
+        <section class="filtro-precos">
+
+            <div class="campo-precos">
+                <label for="filtroProfissional">Escolha o profissional:</label>
+
+                <select id="filtroProfissional">
+                    <option value="todos">Todos os profissionais</option>
+                    <option value="eletricista">Eletricista</option>
+                    <option value="pintor">Pintor</option>
+                    <option value="pedreiro">Pedreiro</option>
+                </select>
             </div>
-            <p class="nota">Os valores são apenas uma referência e podem variar conforme a região e o profissional.</p>
+
         </section>
+
+        <section class="lista-precos" id="listaPrecos">
+
+            <article class="cartao-preco" data-oficio="eletricista">
+
+                <div class="icone-preco">⚡</div>
+
+                <h3>Eletricista</h3>
+
+                <p class="descricao-preco">
+                    Serviços de instalação e manutenção elétrica.
+                </p>
+
+                <div class="servico-preco">
+                    <span>Instalação de tomada</span>
+                    <strong>R$ 50 a R$ 100</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Instalação de chuveiro</span>
+                    <strong>R$ 80 a R$ 150</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Troca de disjuntor</span>
+                    <strong>R$ 60 a R$ 120</strong>
+                </div>
+
+            </article>
+
+            <article class="cartao-preco" data-oficio="pintor">
+
+                <div class="icone-preco">🎨</div>
+
+                <h3>Pintor</h3>
+
+                <p class="descricao-preco">
+                    Serviços de pintura e acabamento.
+                </p>
+
+                <div class="servico-preco">
+                    <span>Pintura de parede</span>
+                    <strong>R$ 15 a R$ 30/m²</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Pintura de teto</span>
+                    <strong>R$ 20 a R$ 35/m²</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Preparação de parede</span>
+                    <strong>R$ 10 a R$ 20/m²</strong>
+                </div>
+
+            </article>
+
+            <article class="cartao-preco" data-oficio="pedreiro">
+
+                <div class="icone-preco">🧱</div>
+
+                <h3>Pedreiro</h3>
+
+                <p class="descricao-preco">
+                    Serviços de construção e reforma.
+                </p>
+
+                <div class="servico-preco">
+                    <span>Assentamento de piso</span>
+                    <strong>R$ 35 a R$ 65/m²</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Reboco de parede</span>
+                    <strong>R$ 25 a R$ 45/m²</strong>
+                </div>
+
+                <div class="servico-preco">
+                    <span>Assentamento de revestimento</span>
+                    <strong>R$ 40 a R$ 80/m²</strong>
+                </div>
+
+            </article>
+
+        </section>
+
+        <p class="nenhum-preco" id="nenhumPreco" hidden>
+            Nenhum serviço encontrado.
+        </p>
+
+        <section class="aviso-precos">
+
+            <span class="icone-aviso">💡</span>
+
+            <div>
+                <h3>Fique atento!</h3>
+
+                <p>
+                    Os valores apresentados são apenas estimativas para o protótipo.
+                    O preço final pode variar conforme a região, o tamanho do serviço,
+                    os materiais utilizados e o profissional contratado.
+                </p>
+            </div>
+
+        </section>
+
     </main>
+
+    <footer class="rodape">
+        <p>© 2026 ObraLink. Todos os direitos reservados.</p>
+        <p>Conectando você aos profissionais certos.</p>
+    </footer>
 
     <script src="script.js" defer></script>
 </body>
