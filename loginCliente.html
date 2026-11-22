@@ -13,6 +13,7 @@
             <img src="profissional/icones/logo.png" alt="Logotipo do ObraLink">
             <h1>ObraLink</h1>
         </a>
+
         <nav aria-label="Navegação principal">
             <a href="bemVindo.html" class="link">Voltar</a>
         </nav>
@@ -20,7 +21,11 @@
 
     <main class="login">
         <section class="login-card" aria-labelledby="titulo-login">
-            <svg class="login-icone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+            <svg class="login-icone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <path d="M9 22V12h6v10"/>
+            </svg>
+
             <div>
                 <h2 id="titulo-login">Entrar como cliente</h2>
                 <p class="lead">Acesse para encontrar profissionais e acompanhar suas obras.</p>
@@ -28,17 +33,22 @@
 
             <form class="formulario" action="cliente/index.html" method="get">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+                <input type="email" id="email" name="email" placeholder="voce@exemplo.com" autocomplete="email" required>
 
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
 
                 <button type="submit" class="btn">Entrar</button>
             </form>
 
-            <p class="nota"><strong>Acesso de demonstração.</strong> Nesta versão do protótipo o e-mail e a senha não são verificados: preencha os campos para entrar.</p>
+            <p class="nota">
+                <strong>Acesso de demonstração.</strong>
+                Nesta versão do protótipo o e-mail e a senha não são verificados: preencha os campos para entrar.
+            </p>
 
-            <p class="login-troca">É profissional? <a href="loginproficional.html">Entre aqui</a></p>
+            <p class="login-troca">
+                É profissional? <a href="loginproficional.html">Entre aqui</a>
+            </p>
         </section>
     </main>
 
