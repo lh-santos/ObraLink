@@ -25,11 +25,11 @@
 
     <main class="contener-main">
         <div class="cabecalho-pagina">
-            <h2 class="titulo-pagina">Calculadora</h2>
-            <p class="subtitulo-pagina">Faça contas rápidas para conferir valores e quantidades.</p>
+            <h2 class="titulo-pagina">Calculadora e orçamento</h2>
+            <p class="subtitulo-pagina">Faça contas rápidas e monte orçamentos para seus clientes.</p>
         </div>
 
-        <section class="contener-main pagina-unica">
+        <div class="layout-calculadora">
             <section class="contener-calculadora" aria-label="Calculadora">
                 <input type="text" id="meuInput" readonly inputmode="none" aria-label="Visor da calculadora" placeholder="0">
 
@@ -57,8 +57,115 @@
                     <button type="button" class="bntn bntn-zero" onclick="adicionarCaractere('0')">0</button>
                     <button type="button" class="bntn" onclick="adicionarCaractere(',')" aria-label="Vírgula">,</button>
                 </div>
+
+                <div class="usar-resultado">
+                    <p>Usar o resultado no orçamento:</p>
+                    <div>
+                        <button type="button" class="btn btn-claro" id="usarQuantidade">Como quantidade</button>
+                        <button type="button" class="btn btn-claro" id="usarPreco">Como preço unitário</button>
+                    </div>
+                </div>
             </section>
+
+            <section class="orcamento" aria-labelledby="titulo-orcamento">
+                <div class="orcamento-topo">
+                    <h3 id="titulo-orcamento">Montar orçamento</h3>
+                    <span id="orcEstado" class="status status-andamento">Novo orçamento</span>
+                </div>
+
+                <div class="orcamento-dados">
+                    <div class="campo">
+                        <label for="orcTitulo">Nome do orçamento</label>
+                        <input type="text" id="orcTitulo" maxlength="80" placeholder="Ex.: Reforma do banheiro" required>
+                    </div>
+                    <div class="campo">
+                        <label for="orcCliente">Cliente</label>
+                        <select id="orcCliente"></select>
+                    </div>
+                </div>
+
+                <form id="formItemOrcamento" class="orcamento-item" aria-label="Adicionar item ao orçamento">
+                    <div class="campo campo-descricao">
+                        <label for="orcDescricao">Serviço ou material</label>
+                        <input type="text" id="orcDescricao" list="sugestoesPrecos" maxlength="80" placeholder="Digite ou escolha da sua Média de preços" required>
+                        <datalist id="sugestoesPrecos"></datalist>
+                    </div>
+                    <div class="campo">
+                        <label for="orcTipo">Tipo</label>
+                        <select id="orcTipo">
+                            <option>Serviço</option>
+                            <option>Material</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="orcUnidade">Unidade</label>
+                        <input type="text" id="orcUnidade" list="listaUnidades" maxlength="12" placeholder="m², un, h…" required>
+                        <datalist id="listaUnidades">
+                            <option value="un"></option>
+                            <option value="m"></option>
+                            <option value="m²"></option>
+                            <option value="m³"></option>
+                            <option value="h"></option>
+                            <option value="dia"></option>
+                            <option value="serviço"></option>
+                        </datalist>
+                    </div>
+                    <div class="campo">
+                        <label for="orcQuantidade">Quantidade</label>
+                        <input type="number" id="orcQuantidade" min="0" step="any" inputmode="decimal" required>
+                    </div>
+                    <div class="campo">
+                        <label for="orcPreco">Preço unitário (R$)</label>
+                        <input type="number" id="orcPreco" min="0" step="0.01" inputmode="decimal" required>
+                    </div>
+                    <button type="submit" class="btn">Adicionar item</button>
+                </form>
+
+                <p id="orcMensagem" class="orc-msg" role="status" aria-live="polite"></p>
+
+                <div class="tabela-container">
+                    <table>
+                        <caption class="sr-only">Itens do orçamento</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Qtd.</th>
+                                <th scope="col">Unid.</th>
+                                <th scope="col">Valor unit.</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaItensOrcamento"></tbody>
+                    </table>
+                </div>
+
+                <div class="orcamento-resumo">
+                    <p class="orcamento-total">Total estimado: <strong id="orcTotal">R$ 0,00</strong></p>
+                    <p id="orcSubtotais"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="orcObs">Observações (opcional)</label>
+                    <textarea id="orcObs" rows="2" maxlength="300" placeholder="Prazo de execução, condições, materiais não incluídos…"></textarea>
+                </div>
+
+                <div class="orcamento-acoes">
+                    <button type="button" class="btn" id="btnSalvarOrc">Salvar orçamento</button>
+                    <button type="button" class="btn btn-claro" id="btnImprimirOrc">Imprimir / salvar PDF</button>
+                    <button type="button" class="btn btn-claro" id="btnNovoOrc">Novo orçamento</button>
+                </div>
+
+                <p class="nota">Este orçamento é uma estimativa de custos e não substitui um contrato formal entre as partes.</p>
+            </section>
+        </div>
+
+        <section class="orcamentos-salvos" aria-labelledby="titulo-salvos">
+            <h3 class="secao-titulo" id="titulo-salvos">Orçamentos salvos</h3>
+            <div class="contener cards" id="listaOrcamentos"></div>
         </section>
+
+        <section id="orcamentoImpressao" class="documento-impressao" aria-hidden="true"></section>
     </main>
 
     <footer>

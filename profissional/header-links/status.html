@@ -24,15 +24,21 @@
     </header>
 
     <main class="contener-main">
-        <h2 class="titulo-pagina">Meu status</h2>
+        <div class="cabecalho-pagina">
+            <h2 class="titulo-pagina">Meu status</h2>
+            <p class="subtitulo-pagina">Informe se você está disponível para novas obras.</p>
+        </div>
 
         <section class="contener pagina-unica">
-            <article class="card">
+            <article class="card status-card">
                 <h3>Disponibilidade profissional</h3>
 
-                <p>Seu status atual:</p>
+                <div class="status-linha">
+                    <p>Seu status atual:</p>
+                    <span id="statusProfissional" class="status"></span>
+                </div>
 
-                <span id="statusProfissional" class="status"></span>
+                <p class="info">Use o botão abaixo para alternar entre disponível e trabalhando.</p>
 
                 <button type="button" id="alterarStatus" class="btn">
                     Alterar status

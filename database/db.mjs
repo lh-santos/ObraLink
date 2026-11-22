@@ -1,16 +1,29 @@
-import { initializeApp } from "firebase/app";
-import { config } from "dotenv"; config(); 6.8k (gzipped: 3k)
 
-const { API_KEY, AUTH_DOMAIN, PROJECT_ID, STOREGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } = process.env;
+import { initializeApp } from "firebase/app";
+import { config } from "dotenv";
+import { getDatabase } from "firebase/database";
+
+config();
+
+const {
+    API_KEY,
+    AUTH_DOMAIN,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGING_SENDER_ID,
+    APP_ID
+} = process.env;
 
 const firebaseConfig = {
-  apiKey: 
-  authDomain: "obralink-a84db.firebaseapp.com",
-  projectId: "obralink-a84db",
-  storageBucket: "obralink-a84db.firebasestorage.app",
-  messagingSenderId: "106739292886",
-  appId: "1:106739292886:web:d6612dfa97975f290e8777"
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGING_SENDER_ID,
+    appId: APP_ID,
+    databaseURL: "https://obralink-a84db-default-rtdb.firebaseio.com"
 };
 
-
 const app = initializeApp(firebaseConfig);
+
+export const db = getDatabase(app);
