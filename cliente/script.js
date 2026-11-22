@@ -1,499 +1,269 @@
-const campo = document.getElementById('meuInput');
-let mostrandoResultado = false;
-const OPERADORES = '+-×÷';
+/* ===== Comum a todas as páginas ===== */
+(function () {
+    // Destaca no menu a página aberta
+    var arquivo = decodeURIComponent(location.pathname.split('/').pop()) || 'index.html';
+    document.querySelectorAll('nav .link').forEach(function (a) {
+        var destino = decodeURIComponent(a.getAttribute('href').split('/').pop());
+        if (destino === arquivo) a.setAttribute('aria-current', 'page');
+    });
 
-function ehOperador(caractere) {
-    return OPERADORES.includes(caractere);
-}
+    // Se uma imagem não carregar, mostra um bloco cinza no lugar
+    document.querySelectorAll('.contener a img, .anucios a img').forEach(function (img) {
+        function falhou() {
+            img.hidden = true;
+            if (img.parentElement) img.parentElement.classList.add('sem-imagem');
+        }
+        img.addEventListener('error', falhou);
+        if (img.complete && img.naturalWidth === 0) falhou();
+    });
+})();
 
-function adicionarCaractere(caractere) {
+/* ===== Calculadora ===== */
+var campo = document.getElementById('meuInput');
+var mostrandoResultado = false;
+var OPERADORES = '+-×÷';
+
+function ehOperador(c) { return OPERADORES.indexOf(c) !== -1; }
+
+function adicionarCaractere(c) {
     if (!campo) return;
-
-    let valor = campo.value;
-
+    var valor = campo.value;
     if (valor === 'Erro') valor = '';
 
     if (mostrandoResultado) {
-        if (!ehOperador(caractere)) valor = '';
+        // Dígito ou vírgula começam um cálculo novo; operador continua do resultado
+        if (!ehOperador(c)) valor = '';
         mostrandoResultado = false;
     }
 
-    const ultimo = valor.slice(-1);
+    var ultimo = valor.slice(-1);
 
-    if (ehOperador(caractere)) {
-        if (!valor && caractere !== '-') return;
-
+    if (ehOperador(c)) {
+        if (valor === '') { if (c === '-') valor = '-'; campo.value = valor; return; }
+        if (valor === '-') return;
         if (ehOperador(ultimo)) {
-            if (caractere === '-' && (ultimo === '×' || ultimo === '÷')) {
-                campo.value = valor + caractere;
-                return;
-            }
-
-            campo.value = valor.slice(0, -1) + caractere;
+            // Troca o operador anterior (permite "5×-3")
+            if (c === '-' && (ultimo === '×' || ultimo === '÷')) { campo.value = valor + c; return; }
+            if (ehOperador(valor.slice(-2, -1))) valor = valor.slice(0, -1);
+            campo.value = valor.slice(0, -1) + c;
             return;
         }
-
-        campo.value = valor + caractere;
+        campo.value = valor + c;
         return;
     }
 
-    if (caractere === ',') {
-        const numeros = valor.split(/[+\-×÷]/);
-        const atual = numeros[numeros.length - 1];
-
-        if (atual.includes(',')) return;
-
-        campo.value = valor + (atual === '' ? '0,' : ',');
+    if (c === ',') {
+        var partes = valor.split(/[+\-×÷]/);
+        var numeroAtual = partes[partes.length - 1];
+        if (numeroAtual.indexOf(',') !== -1) return;
+        campo.value = valor + (numeroAtual === '' ? '0,' : ',');
         return;
     }
 
-    campo.value = valor + caractere;
+    campo.value = valor + c;
 }
 
 function limpar() {
     if (!campo) return;
-
     campo.value = '';
     mostrandoResultado = false;
 }
 
 function apagar() {
     if (!campo) return;
-
-    if (mostrandoResultado || campo.value === 'Erro') {
-        limpar();
-        return;
-    }
-
+    if (mostrandoResultado || campo.value === 'Erro') { limpar(); return; }
     campo.value = campo.value.slice(0, -1);
 }
 
 function avaliar(expressao) {
-    const numeros = [];
-    let numero = '';
-
-    for (let i = 0; i < expressao.length; i++) {
-        const caractere = expressao[i];
-
-        if (/[0-9,]/.test(caractere)) {
-            numero += caractere === ',' ? '.' : caractere;
-        } else if (
-            caractere === '-' &&
-            numero === '' &&
-            (numeros.length === 0 || ehOperador(numeros[numeros.length - 1]))
-        ) {
-            numero = '-';
+    var t = [], num = '';
+    for (var i = 0; i < expressao.length; i++) {
+        var ch = expressao[i];
+        if (/[0-9,]/.test(ch)) {
+            num += ch === ',' ? '.' : ch;
+        } else if (ch === '-' && num === '' && (t.length === 0 || ehOperador(t[t.length - 1]))) {
+            num = '-';
         } else {
-            if (numero !== '' && numero !== '-') {
-                numeros.push(parseFloat(numero));
-                numero = '';
-            }
-
-            numeros.push(caractere);
+            if (num !== '' && num !== '-') { t.push(parseFloat(num)); num = ''; }
+            t.push(ch);
         }
     }
+    if (num !== '' && num !== '-') t.push(parseFloat(num));
 
-    if (numero !== '' && numero !== '-') {
-        numeros.push(parseFloat(numero));
+    // 1ª passada: × e ÷
+    var p = [t[0]];
+    for (var j = 1; j < t.length; j += 2) {
+        var op = t[j], n = t[j + 1];
+        if (typeof n !== 'number' || isNaN(n)) throw new Error('inválido');
+        if (op === '×') p[p.length - 1] *= n;
+        else if (op === '÷') {
+            if (n === 0) throw new Error('divisão por zero');
+            p[p.length - 1] /= n;
+        } else p.push(op, n);
     }
-
-    if (!numeros.length || typeof numeros[0] !== 'number') {
-        throw new Error('Expressão inválida');
-    }
-
-    const resultado = [numeros[0]];
-
-    for (let i = 1; i < numeros.length; i += 2) {
-        const operador = numeros[i];
-        const proximo = numeros[i + 1];
-
-        if (typeof proximo !== 'number' || !Number.isFinite(proximo)) {
-            throw new Error('Expressão inválida');
-        }
-
-        if (operador === '×') {
-            resultado[resultado.length - 1] *= proximo;
-        } else if (operador === '÷') {
-            if (proximo === 0) throw new Error('Divisão por zero');
-
-            resultado[resultado.length - 1] /= proximo;
-        } else {
-            resultado.push(operador, proximo);
-        }
-    }
-
-    let total = resultado[0];
-
-    for (let i = 1; i < resultado.length; i += 2) {
-        total = resultado[i] === '+'
-            ? total + resultado[i + 1]
-            : total - resultado[i + 1];
-    }
-
-    return total;
+    // 2ª passada: + e −
+    var r = p[0];
+    for (var k = 1; k < p.length; k += 2) r = p[k] === '+' ? r + p[k + 1] : r - p[k + 1];
+    return r;
 }
 
 function calcular() {
-    if (!campo || !campo.value) return;
-
-    let expressao = campo.value;
-
-    while (ehOperador(expressao.slice(-1)) || expressao.slice(-1) === ',') {
+    if (!campo) return;
+    var expressao = campo.value;
+    while (expressao && (ehOperador(expressao.slice(-1)) || expressao.slice(-1) === ',')) {
         expressao = expressao.slice(0, -1);
     }
-
+    if (!expressao || expressao === '-' || campo.value === 'Erro') return;
     try {
-        const resultado = avaliar(expressao);
-
-        if (!Number.isFinite(resultado)) throw new Error();
-
-        campo.value = String(Number(resultado.toFixed(10))).replace('.', ',');
+        var r = avaliar(expressao);
+        if (!isFinite(r)) throw new Error('inválido');
+        campo.value = String(Number(r.toFixed(10))).replace('.', ',');
         mostrandoResultado = true;
-    } catch {
+    } catch (e) {
         campo.value = 'Erro';
         mostrandoResultado = true;
     }
 }
 
-
-// ELEMENTOS DA PÁGINA
-
-const filtroOficio = document.getElementById("filtroOficio");
-const listaProfissionais = document.getElementById("listaProfissionais");
-const contagem = document.getElementById("contagem");
-const semResultados = document.getElementById("semResultados");
-
-// FILTRAR PROFISSIONAIS
-
-function filtrarProfissionais() {
-
-    const oficioSelecionado = filtroOficio.value;
-
-    const cartoes = document.querySelectorAll(
-        ".cartao-profissional"
-    );
-
-    let quantidade = 0;
-
-    cartoes.forEach(cartao => {
-
-        const oficio = cartao.dataset.oficio;
-
-        if (
-            oficioSelecionado === "" ||
-            oficio === oficioSelecionado
-        ) {
-
-            cartao.style.display = "block";
-            quantidade++;
-
-        } else {
-
-            cartao.style.display = "none";
-
-        }
-
-    });
-
-    contagem.textContent =
-        `${quantidade} profissional(is) encontrado(s).`;
-
-    semResultados.hidden = quantidade !== 0;
-}
-
-// ATUALIZAR FILTRO
-
-filtroOficio.addEventListener(
-    "change",
-    filtrarProfissionais
-);
-
-// SOLICITAR VISITA TÉCNICA
-
-const formularios = document.querySelectorAll(".form-visita");
-
-formularios.forEach(formulario => {
-
-    formulario.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        const cartao = formulario.closest(
-            ".cartao-profissional"
-        );
-
-        const nome = cartao.querySelector("h3").textContent;
-
-        const data = formulario.querySelector(
-            'input[type="date"]'
-        ).value;
-
-        const periodo = formulario.querySelector(
-            "select"
-        ).value;
-
-        const descricao = formulario.querySelector(
-            "textarea"
-        ).value;
-
-        alert(
-            "Solicitação registrada no protótipo!\n\n" +
-            "Profissional: " + nome + "\n" +
-            "Data: " + data + "\n" +
-            "Período: " + periodo + "\n" +
-            "Serviço: " + descricao
-        );
-
-        formulario.reset();
-
-    });
-
+// Teclado: números, operadores, Enter, Backspace e Esc
+document.addEventListener('keydown', function (e) {
+    if (!campo || e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key;
+    if (/^[0-9]$/.test(k)) adicionarCaractere(k);
+    else if (k === ',' || k === '.') adicionarCaractere(',');
+    else if (k === '+' || k === '-') adicionarCaractere(k);
+    else if (k === '*' || k === 'x' || k === 'X') adicionarCaractere('×');
+    else if (k === '/') adicionarCaractere('÷');
+    else if (k === 'Enter' || k === '=') { if (document.activeElement.tagName !== 'BUTTON') calcular(); else return; }
+    else if (k === 'Backspace') apagar();
+    else if (k === 'Escape') limpar();
+    else return;
+    e.preventDefault();
 });
 
-// DEFINIR DATA MÍNIMA
+/* ===== Média de preços ===== */
+(function () {
+    var form = document.getElementById('formPreco');
+    if (!form) return;
 
-document.querySelectorAll(
-    '.form-visita input[type="date"]'
-).forEach(campo => {
+    var CHAVE = 'obralink:media-precos';
+    var corpo = document.getElementById('listaPrecos');
+    var resumo = document.getElementById('resumo');
+    var itens = carregar();
 
-    const hoje = new Date();
-
-    const ano = hoje.getFullYear();
-    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
-    const dia = String(hoje.getDate()).padStart(2, "0");
-
-    campo.min = `${ano}-${mes}-${dia}`;
-
-});
-
-// INICIAR PÁGINA
-
-filtrarProfissionais();
-
-
-// =====================================
-// MINHAS OBRAS - OBRALINK
-// =====================================
-
-
-// BOTÃO VER DETALHES
-
-const botoesDetalhes = document.querySelectorAll(
-    ".acoes-cartao a:first-child"
-);
-
-botoesDetalhes.forEach(botao => {
-
-    botao.addEventListener("click", function(event) {
-
-        event.preventDefault();
-
-        const cartao = botao.closest(".cartao-obra");
-
-        let detalhes = cartao.querySelector(".detalhes-obra");
-
-        if (!detalhes) {
-
-            detalhes = document.createElement("div");
-
-            detalhes.classList.add("detalhes-obra");
-
-            const titulo = cartao.querySelector(
-                ".topo-obra h3"
-            ).textContent;
-
-            const informacoes = cartao.querySelector(
-                ".meta-obra"
-            ).innerHTML;
-
-            const progresso = cartao.querySelector("progress");
-
-            const percentual = progresso.value;
-
-            detalhes.innerHTML = `
-                <h4>Detalhes da obra</h4>
-
-                <p><strong>Serviço:</strong> ${titulo}</p>
-
-                <ul>${informacoes}</ul>
-
-                <p><strong>Progresso:</strong> ${percentual}%</p>
-            `;
-
-            detalhes.hidden = true;
-
-            cartao.appendChild(detalhes);
-        }
-
-        detalhes.hidden = !detalhes.hidden;
-
-        botao.textContent = detalhes.hidden
-            ? "Ver detalhes"
-            : "Ocultar detalhes";
-
-    });
-
-});
-
-// =====================================
-// GERAR RELATÓRIO EM PDF
-// =====================================
-
-function baixarRelatorio(cartao) {
-
-    const titulo = cartao.querySelector(
-        ".topo-obra h3"
-    ).textContent;
-
-    const status = cartao.querySelector(
-        ".selo"
-    ).textContent;
-
-    const informacoes = cartao.querySelector(
-        ".meta-obra"
-    ).innerText;
-
-    const progresso = cartao.querySelector("progress");
-
-    const percentual = progresso.value;
-
-    const janela = window.open("", "_blank");
-
-    if (!janela) {
-        alert("Permita a abertura de janelas pop-up para gerar o PDF.");
-        return;
+    function carregar() {
+        try {
+            var bruto = localStorage.getItem(CHAVE);
+            var lista = bruto ? JSON.parse(bruto) : [];
+            return Array.isArray(lista) ? lista : [];
+        } catch (e) { return []; }
     }
 
-    const escapar = texto => texto.replace(
-        /[&<>"']/g,
-        caractere => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        })[caractere]
-    );
+    function salvar() {
+        try { localStorage.setItem(CHAVE, JSON.stringify(itens)); return true; }
+        catch (e) { return false; }
+    }
 
-    janela.document.write(`
-        <!DOCTYPE html>
-        <html lang="pt-BR">
-        <head>
-            <meta charset="UTF-8">
-            <title>Relatório ObraLink</title>
+    function celula(tr, texto) {
+        var td = document.createElement('td');
+        td.textContent = texto;
+        tr.appendChild(td);
+        return td;
+    }
 
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    padding: 35px;
-                    color: #333;
-                }
+    function desenhar() {
+        corpo.replaceChildren();
 
-                h1 {
-                    color: #002f75;
-                    border-bottom: 3px solid #d6a000;
-                    padding-bottom: 12px;
-                }
-
-                h2 {
-                    color: #002f75;
-                }
-
-                .caixa {
-                    border: 1px solid #ddd;
-                    padding: 20px;
-                    border-radius: 8px;
-                    margin-top: 20px;
-                }
-
-                .progresso {
-                    background: #ddd;
-                    height: 12px;
-                    border-radius: 20px;
-                    overflow: hidden;
-                }
-
-                .barra {
-                    background: #002f75;
-                    height: 12px;
-                    width: ${percentual}%;
-                }
-
-                footer {
-                    margin-top: 50px;
-                    text-align: center;
-                    color: #777;
-                }
-            </style>
-        </head>
-
-        <body>
-
-            <h1>ObraLink</h1>
-
-            <p>Relatório de acompanhamento de obra.</p>
-
-            <div class="caixa">
-
-                <h2>${escapar(titulo)}</h2>
-
-                <p><strong>Status:</strong> ${escapar(status)}</p>
-
-                <p><strong>Informações:</strong></p>
-
-                <p>${escapar(informacoes).replace(/\n/g, "<br>")}</p>
-
-                <p><strong>Andamento:</strong> ${percentual}%</p>
-
-                <div class="progresso">
-                    <div class="barra"></div>
-                </div>
-
-            </div>
-
-            <footer>
-                © 2026 ObraLink. Todos os direitos reservados.
-            </footer>
-
-        </body>
-        </html>
-    `);
-
-    janela.document.close();
-
-    janela.onload = function() {
-        janela.focus();
-        janela.print();
-    };
-
-}
-
-// =====================================
-// BOTÕES DE BAIXAR RELATÓRIO
-// =====================================
-
-const botoesRelatorios = document.querySelectorAll(
-    ".acoes-cartao a.botao-secundario, .lista-relatorios a.botao"
-);
-
-botoesRelatorios.forEach(botao => {
-
-    botao.addEventListener("click", function(event) {
-
-        event.preventDefault();
-
-        let cartao = botao.closest(".cartao-obra");
-
-        if (!cartao) {
-            cartao = document.querySelector(".cartao-obra");
+        if (!itens.length) {
+            var vazio = document.createElement('tr');
+            var td = document.createElement('td');
+            td.colSpan = 4;
+            td.className = 'vazio';
+            td.textContent = 'Nenhum item cadastrado. Preencha o formulário acima para adicionar o primeiro.';
+            vazio.appendChild(td);
+            corpo.appendChild(vazio);
         }
 
-        if (cartao) {
-            baixarRelatorio(cartao);
-        }
+        itens.forEach(function (item, i) {
+            var tr = document.createElement('tr');
+            celula(tr, item.nome);
+            celula(tr, item.unidade);
 
+            var tdPreco = document.createElement('td');
+            tdPreco.className = 'celula-preco';
+            var entrada = document.createElement('input');
+            entrada.type = 'number';
+            entrada.min = '0';
+            entrada.step = '0.01';
+            entrada.value = item.preco;
+            entrada.setAttribute('aria-label', 'Preço médio de ' + item.nome + ', em reais');
+            entrada.addEventListener('change', function () {
+                var novo = parseFloat(entrada.value);
+                if (isNaN(novo) || novo < 0) { entrada.value = item.preco; return; }
+                item.preco = novo;
+                salvar();
+            });
+            tdPreco.appendChild(entrada);
+            tr.appendChild(tdPreco);
+
+            var tdAcao = document.createElement('td');
+            var remover = document.createElement('button');
+            remover.type = 'button';
+            remover.className = 'btn-remover';
+            remover.textContent = 'Remover';
+            remover.setAttribute('aria-label', 'Remover ' + item.nome);
+            remover.addEventListener('click', function () {
+                itens.splice(i, 1);
+                salvar();
+                desenhar();
+            });
+            tdAcao.appendChild(remover);
+            tr.appendChild(tdAcao);
+
+            corpo.appendChild(tr);
+        });
+
+        resumo.textContent = itens.length + (itens.length === 1 ? ' item cadastrado' : ' itens cadastrados');
+    }
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nome = document.getElementById('itemNome').value.trim();
+        var unidade = document.getElementById('itemUnidade').value;
+        var preco = parseFloat(document.getElementById('itemPreco').value);
+        if (!nome || isNaN(preco) || preco < 0) return;
+
+        itens.push({ nome: nome, unidade: unidade, preco: preco });
+        var salvou = salvar();
+        form.reset();
+        desenhar();
+        if (!salvou) resumo.textContent += '. Não foi possível salvar neste navegador.';
+        document.getElementById('itemNome').focus();
     });
 
-});
+    desenhar();
+})();
 
-console.log("Minhas obras carregada com sucesso!");
+/* ===== Área do cliente: filtro de profissionais por ofício ===== */
+(function () {
+    var seletor = document.getElementById('filtroOficio');
+    if (!seletor) return;
+
+    var cartoes = document.querySelectorAll('#listaProfissionais .cartao-profissional');
+    var semResultados = document.getElementById('semResultados');
+    var contagem = document.getElementById('contagem');
+
+    function aplicar() {
+        var filtro = seletor.value, total = 0;
+        cartoes.forEach(function (c) {
+            var mostrar = !filtro || c.dataset.oficio === filtro;
+            c.hidden = !mostrar;
+            if (mostrar) total++;
+        });
+        if (semResultados) semResultados.hidden = total > 0;
+        if (contagem) contagem.textContent = total + (total === 1 ? ' profissional encontrado' : ' profissionais encontrados');
+    }
+
+    seletor.addEventListener('change', aplicar);
+    aplicar();
+})();

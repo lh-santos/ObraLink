@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obras concluídas | ObraLink</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/funcionalidades.css">
-    <link rel="icon" type="image/x-icon" href="icones/favicon-32x32.png">
+    <link rel="stylesheet" href="../profissional/css/style.css">
+    <link rel="icon" type="image/png" href="icones/favicon-32x32.png">
 </head>
-
 <body>
-
     <header>
         <a href="index.html" class="logo">
-            <img src="icones/logo.png" alt="Logo ObraLink">
+            <img src="icones/08560e44-7619-4032-a3a6-54a197e1a773.png" alt="Logotipo do ObraLink">
             <h1>ObraLink</h1>
         </a>
+        <span class="area-chip">Área do cliente</span>
 
         <nav aria-label="Navegação principal">
             <a href="index.html" class="link">Início</a>
@@ -24,233 +22,51 @@
         </nav>
     </header>
 
-    <main class="pagina-concluidas">
-
-        <h2 class="titulo-pagina">Obras concluídas</h2>
-
-        <p class="texto-apoio">
-            Confira os serviços finalizados e acompanhe o histórico das suas obras.
-        </p>
-
-        <section class="resumo-concluidas">
-
-            <div class="resumo-item">
-                <span class="resumo-icone">✓</span>
-
-                <div>
-                    <strong>3</strong>
-                    <p>Obras concluídas</p>
-                </div>
+    <main>
+        <section class="contener-main">
+            <div class="cabecalho-pagina">
+                <h2 class="titulo-pagina">Obras concluídas</h2>
+                <p class="subtitulo-pagina">Consulte as obras já finalizadas e baixe o relatório de cada uma.</p>
             </div>
-
-            <div class="resumo-item">
-                <span class="resumo-icone">⌂</span>
-
-                <div>
-                    <strong>3</strong>
-                    <p>Serviços finalizados</p>
-                </div>
+      <!-- EXEMPLOS: substitua pelas obras concluídas reais -->
+    <section class="lista-obras" aria-label="Obras concluídas">
+        <article class="cartao-obra">
+            <div class="topo-obra">
+                <h3>Troca da fiação do banheiro</h3>
+                <span class="selo selo-concluida">Concluída</span>
             </div>
+            <ul class="meta-obra">
+                <li><strong>Profissional:</strong> Anderson Souza (Eletricista)</li>
+                <li><strong>Concluída em:</strong> 10/10/2026</li>
+            </ul>
+            <div class="acoes-cartao">
+                <a class="botao" href="#">Ver detalhes</a>
+                <a class="botao botao-secundario" href="#" download>Baixar relatório (PDF)</a>
+            </div>
+        </article>
+         <article class="cartao-obra">
+            <div class="topo-obra">
+                <h3>Reboco do muro da frente</h3>
+                <span class="selo selo-concluida">Concluída</span>
+            </div>
+            <ul class="meta-obra">
+                <li><strong>Profissional:</strong> José Lima (Pedreiro)</li>
+                <li><strong>Concluída em:</strong> 02/09/2026</li>
+            </ul>
+            <div class="acoes-cartao">
+                <a class="botao" href="#">Ver detalhes</a>
+                <a class="botao botao-secundario" href="#" download>Baixar relatório (PDF)</a>
+            </div>
+        </article>
+    </section>
 
         </section>
-
-        <section class="secao-concluidas">
-
-            <div class="cabecalho-concluidas">
-                <h2>Seus serviços finalizados</h2>
-                <span>3 obras</span>
-            </div>
-
-            <div class="lista-concluidas">
-
-
-                <article class="cartao-concluida">
-
-                    <div class="topo-concluida">
-
-                        <div class="icone-concluida">⚡</div>
-
-                        <div class="titulo-concluida">
-                            <h3>Manutenção elétrica do banheiro</h3>
-
-                            <span class="status-concluida">
-                                ✓ Concluída
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div class="dados-concluida">
-
-                        <p>
-                            <strong>Profissional:</strong>
-                            Anderson Souza (Eletricista)
-                        </p>
-
-                        <p>
-                            <strong>Data de conclusão:</strong>
-                            10/10/2026
-                        </p>
-
-                    </div>
-
-                    <div class="acoes-concluida">
-
-                        <button class="botao-concluida"
-                            data-detalhes="detalhe1">
-                            Ver detalhes
-                        </button>
-
-                        <button class="botao-concluida secundario-concluida"
-                            data-pdf="detalhe1">
-                            Gerar relatório PDF
-                        </button>
-
-                    </div>
-
-                    <div class="detalhes-concluida" id="detalhe1" hidden>
-
-                        <h4>Detalhes do serviço</h4>
-
-                        <p>Manutenção da instalação elétrica do banheiro,
-                            substituição de tomadas e revisão da iluminação.</p>
-
-                        <p><strong>Profissional:</strong> Anderson Souza</p>
-                        <p><strong>Status:</strong> Serviço finalizado</p>
-
-                    </div>
-
-                </article>
-
-                <article class="cartao-concluida">
-
-                    <div class="topo-concluida">
-
-                        <div class="icone-concluida">🎨</div>
-
-                        <div class="titulo-concluida">
-                            <h3>Pintura da fachada da casa</h3>
-
-                            <span class="status-concluida">
-                                ✓ Concluída
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div class="dados-concluida">
-
-                        <p>
-                            <strong>Profissional:</strong>
-                            Marcos Pereira (Pintor)
-                        </p>
-
-                        <p>
-                            <strong>Data de conclusão:</strong>
-                            05/09/2026
-                        </p>
-
-                    </div>
-
-                    <div class="acoes-concluida">
-
-                        <button class="botao-concluida"
-                            data-detalhes="detalhe2">
-                            Ver detalhes
-                        </button>
-
-                        <button class="botao-concluida secundario-concluida"
-                            data-pdf="detalhe2">
-                            Gerar relatório PDF
-                        </button>
-
-                    </div>
-
-                    <div class="detalhes-concluida" id="detalhe2" hidden>
-
-                        <h4>Detalhes do serviço</h4>
-
-                        <p>Pintura externa da residência, preparação das paredes
-                            e aplicação de tinta.</p>
-
-                        <p><strong>Profissional:</strong> Marcos Pereira</p>
-                        <p><strong>Status:</strong> Serviço finalizado</p>
-
-                    </div>
-
-                </article>
-
-
-                <article class="cartao-concluida">
-
-                    <div class="topo-concluida">
-
-                        <div class="icone-concluida">🧱</div>
-
-                        <div class="titulo-concluida">
-                            <h3>Reforma do piso da cozinha</h3>
-
-                            <span class="status-concluida">
-                                ✓ Concluída
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div class="dados-concluida">
-
-                        <p>
-                            <strong>Profissional:</strong>
-                            José Lima (Pedreiro)
-                        </p>
-
-                        <p>
-                            <strong>Data de conclusão:</strong>
-                            20/08/2026
-                        </p>
-
-                    </div>
-
-                    <div class="acoes-concluida">
-
-                        <button class="botao-concluida"
-                            data-detalhes="detalhe3">
-                            Ver detalhes
-                        </button>
-
-                        <button class="botao-concluida secundario-concluida"
-                            data-pdf="detalhe3">
-                            Gerar relatório PDF
-                        </button>
-
-                    </div>
-
-                    <div class="detalhes-concluida" id="detalhe3" hidden>
-
-                        <h4>Detalhes do serviço</h4>
-
-                        <p>Retirada do piso antigo e instalação de novo
-                            revestimento na cozinha.</p>
-
-                        <p><strong>Profissional:</strong> José Lima</p>
-                        <p><strong>Status:</strong> Serviço finalizado</p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
     </main>
 
-    <footer class="rodape">
-        <p>© 2026 ObraLink. Todos os direitos reservados.</p>
-        <p>Conectando você aos profissionais certos.</p>
+    <footer>
+        <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js" defer></script>
-
 </body>
 </html>
