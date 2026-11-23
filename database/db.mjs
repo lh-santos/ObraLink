@@ -1,4 +1,3 @@
-
 import { initializeApp } from "firebase/app";
 import { config } from "dotenv";
 import { getDatabase } from "firebase/database";
