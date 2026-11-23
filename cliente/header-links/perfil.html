@@ -14,7 +14,6 @@
             <h1>ObraLink</h1>
         </a>
         <span class="area-chip">Área do cliente</span>
-
         <nav aria-label="Navegação principal">
             <a href="../index.html" class="link">Início</a>
             <a href="historico.html" class="link">Histórico</a>
@@ -22,26 +21,29 @@
         </nav>
     </header>
 
-    <main>
-        <section class="contener-main">
-            <div class="cabecalho-pagina">
-                <h2 class="titulo-pagina">Perfil</h2>
-                <p class="subtitulo-pagina">Seus dados e preferências.</p>
-            </div>
+    <main class="contener-main">
+        <div class="cabecalho-pagina">
+            <h2 class="titulo-pagina">Meu perfil</h2>
+            <p class="subtitulo-pagina">Consulte e atualize suas informações.</p>
+        </div>
 
-            <div class="estado-vazio">
-                <h3>Em breve</h3>
-                <p>Esta página ainda está em desenvolvimento. Volte ao início para acessar as demais funções.</p>
-                <a class="btn" href="../index.html">Voltar ao início</a>
-            </div>
-        </section>
+        <form class="formulario" id="formPerfil">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" minlength="3" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" readonly>
+
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" required>
+
+            <button type="submit" class="btn" id="btnSalvar">Salvar alterações</button>
+            <p id="mensagemPerfil" role="status" aria-live="polite"></p>
+        </form>
     </main>
 
-    <footer>
-        <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="../script.js" defer></script>
+    <footer><p>&copy; 2026 ObraLink. Todos os direitos reservados.</p></footer>
+    <script type="module" src="../js/perfil.js"></script>
     <script type="module" src="../proteger.js"></script>
 </body>
 </html>

@@ -14,7 +14,6 @@
             <h1>ObraLink</h1>
         </a>
         <span class="area-chip">Área do profissional</span>
-
         <nav aria-label="Navegação principal">
             <a href="../index.html" class="link">Início</a>
             <a href="historico.html" class="link">Histórico</a>
@@ -25,25 +24,42 @@
 
     <main class="contener-main">
         <div class="cabecalho-pagina">
-            <h2 class="titulo-pagina">Perfil</h2>
-            <p class="subtitulo-pagina">Seus dados e preferências.</p>
+            <h2 class="titulo-pagina">Meu perfil</h2>
+            <p class="subtitulo-pagina">Consulte e atualize suas informações profissionais.</p>
         </div>
 
-        <div class="estado-vazio">
-            <h3>Perfil em desenvolvimento</h3>
-            <p>Esta página ainda está em desenvolvimento. Enquanto isso, você pode atualizar suas informações de trabalho aqui:</p>
-            <div class="acoes-vazio">
-                    <a class="btn" href="status.html">Meu status</a>
-                    <a class="btn btn-claro" href="../mediaPreços.html">Média de preços</a>
-            </div>
-        </div>
+        <form class="formulario" id="formPerfil">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" minlength="3" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" readonly>
+
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" required>
+
+            <label for="especialidade">Especialidade</label>
+            <select id="especialidade" required>
+                <option value="">Selecione sua especialidade</option>
+                <option value="Pedreiro">Pedreiro</option>
+                <option value="Eletricista">Eletricista</option>
+                <option value="Encanador">Encanador</option>
+                <option value="Pintor">Pintor</option>
+                <option value="Carpinteiro">Carpinteiro</option>
+                <option value="Azulejista">Azulejista</option>
+                <option value="Gesseiro">Gesseiro</option>
+                <option value="Engenheiro">Engenheiro</option>
+                <option value="Arquiteto">Arquiteto</option>
+                <option value="Outro">Outro</option>
+            </select>
+
+            <button type="submit" class="btn" id="btnSalvar">Salvar alterações</button>
+            <p id="mensagemPerfil" role="status" aria-live="polite"></p>
+        </form>
     </main>
 
-    <footer>
-        <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="../script.js" defer></script>
+    <footer><p>&copy; 2026 ObraLink. Todos os direitos reservados.</p></footer>
+    <script type="module" src="../js/perfil.js"></script>
     <script type="module" src="../proteger.js"></script>
 </body>
 </html>
