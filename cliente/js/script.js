@@ -244,6 +244,38 @@ document.addEventListener('keydown', function (e) {
     desenhar();
 })();
 
+/* ===== Solicitação de visita: não aceita datas que já passaram ===== */
+(function () {
+    var campos = document.querySelectorAll('.form-visita input[type="date"]');
+    if (!campos.length) return;
+
+    // Data de hoje no fuso local (AAAA-MM-DD, igual ao valor do <input type="date">)
+    function hoje() {
+        var d = new Date();
+        return d.getFullYear() + '-' +
+            String(d.getMonth() + 1).padStart(2, '0') + '-' +
+            String(d.getDate()).padStart(2, '0');
+    }
+
+    var MENSAGEM = 'Escolha hoje ou uma data futura. Datas que já passaram não são aceitas.';
+
+    function validar(campo) {
+        var passou = campo.value && campo.value < hoje();
+        campo.setCustomValidity(passou ? MENSAGEM : '');
+        return !passou;
+    }
+
+    campos.forEach(function (campo) {
+        campo.min = hoje();                                   // bloqueia no calendário
+        campo.addEventListener('input', function () { validar(campo); });
+        campo.closest('form').addEventListener('submit', function (e) {
+            // Revalida no envio (cobre data digitada à mão ou aba aberta desde ontem)
+            campo.min = hoje();
+            if (!validar(campo)) { e.preventDefault(); campo.reportValidity(); }
+        });
+    });
+})();
+
 /* ===== Área do cliente: filtro de profissionais por ofício ===== */
 (function () {
     var seletor = document.getElementById('filtroOficio');

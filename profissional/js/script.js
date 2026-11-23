@@ -37,6 +37,22 @@ function formatarData(data) {
     return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
 }
 
+/* Data de hoje (fuso local) no formato AAAA-MM-DD, o mesmo do <input type="date"> */
+function dataDeHoje() {
+    const d = new Date();
+
+    return [
+        d.getFullYear(),
+        String(d.getMonth() + 1).padStart(2, '0'),
+        String(d.getDate()).padStart(2, '0')
+    ].join('-');
+}
+
+/* Verdadeiro se a data (AAAA-MM-DD) for anterior a hoje. Comparar texto ISO funciona por ser ordenável. */
+function dataJaPassou(data) {
+    return Boolean(data) && data < dataDeHoje();
+}
+
 /* ===== NAVEGAÇÃO ===== */
 
 (function () {
@@ -359,23 +375,24 @@ document.addEventListener('keydown', function (evento) {
 
         const obras = carregarDados(CHAVES.obras);
 
-        const ativos = clientes.filter(cliente =>
-            obras.some(obra =>
-                obra.clienteId === cliente.id &&
-                obra.status !== 'Concluída'
-            )
+        const abertasDe = cliente => obras.filter(obra =>
+            obra.clienteId === cliente.id &&
+            obra.status !== 'Concluída'
         );
 
-        if (!ativos.length) {
-            lista.textContent = 'Nenhum cliente com obra em aberto.';
+        if (!clientes.length) {
+            lista.textContent = 'Nenhum cliente cadastrado. Use o formulário acima para cadastrar o primeiro.';
             return;
         }
 
-        ativos.forEach(cliente => {
-            const obrasCliente = obras.filter(obra =>
-                obra.clienteId === cliente.id &&
-                obra.status !== 'Concluída'
-            );
+        // Todos os clientes cadastrados aparecem; os que têm obra em aberto vêm primeiro
+        const ordenados = [...clientes].sort((a, b) =>
+            (abertasDe(b).length > 0) - (abertasDe(a).length > 0) ||
+            a.nome.localeCompare(b.nome, 'pt-BR')
+        );
+
+        ordenados.forEach(cliente => {
+            const obrasCliente = abertasDe(cliente);
 
             const card = document.createElement('article');
             card.className = 'card';
@@ -395,7 +412,9 @@ document.addEventListener('keydown', function (evento) {
                 .filter(Boolean)
                 .sort()[0];
 
-            prazo.textContent = 'Próximo prazo: ' + formatarData(proximoPrazo);
+            prazo.textContent = obrasCliente.length
+                ? 'Próximo prazo: ' + formatarData(proximoPrazo)
+                : 'Sem obra em aberto no momento';
 
             card.append(titulo, telefone, quantidade, prazo);
             lista.appendChild(card);
@@ -521,8 +540,19 @@ document.addEventListener('keydown', function (evento) {
 
         preencherClientes();
 
+        // O calendário não deixa escolher dias anteriores a hoje
+        const campoPrazo = document.getElementById('obraPrazo');
+        campoPrazo.min = dataDeHoje();
+
         formulario.addEventListener('submit', function (evento) {
             evento.preventDefault();
+
+            // Validação reforçada: o usuário ainda poderia digitar uma data passada à mão
+            if (dataJaPassou(campoPrazo.value)) {
+                alert('O prazo de conclusão não pode ser uma data que já passou. Escolha hoje ou uma data futura.');
+                campoPrazo.focus();
+                return;
+            }
 
             const obra = {
                 id: gerarId(),
