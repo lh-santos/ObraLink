@@ -1,60 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Entrar como profissional | ObraLink</title>
-    <link rel="stylesheet" href="profissional/css/style.css">
-    <link rel="icon" type="image/png" href="profissional/icones/favicon-32x32.png">
-</head>
-<body>
+    <link rel="stylesheet" href="profissional/css/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="profissional/icones/favicon-32x32.png"
+    />
+  </head>
+  <body>
     <header>
-        <a href="bemVindo.html" class="logo">
-            <img src="profissional/icones/logo.png" alt="Logotipo do ObraLink">
-            <h1>ObraLink</h1>
-        </a>
+      <a href="index.html" class="logo">
+        <img src="profissional/icones/logo.png" alt="Logotipo do ObraLink" />
+        <h1>ObraLink</h1>
+      </a>
 
-        <nav aria-label="Navegação principal">
-            <a href="bemVindo.html" class="link">Voltar</a>
-        </nav>
+      <nav aria-label="Navegação principal">
+        <a href="index.html" class="link">Voltar</a>
+      </nav>
     </header>
 
     <main class="login">
-        <section class="login-card" aria-labelledby="titulo-login">
-            <svg class="login-icone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
+      <section class="login-card" aria-labelledby="titulo-login">
+        <svg
+          class="login-icone"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
 
-            <div>
-                <h2 id="titulo-login">Entrar como profissional</h2>
-                <p class="lead">Acesse para gerenciar seus clientes, obras e relatórios.</p>
-            </div>
+        <div>
+          <h2 id="titulo-login">Entrar como profissional</h2>
+          <p class="lead">
+            Acesse para gerenciar seus clientes, obras e relatórios.
+          </p>
+        </div>
 
-            <form class="formulario" action="profissional/index.html" method="get">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+        <form class="formulario" id="formLogin">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="voce@exemplo.com"
+            autocomplete="email"
+            required
+          />
 
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+            required
+          />
 
-                <button type="submit" class="btn">Entrar</button>
-            </form>
+          <button type="submit" class="btn" id="btnEntrar">Entrar</button>
 
-            <p class="nota">
-                <strong>Acesso de demonstração.</strong>
-                Nesta versão do protótipo o e-mail e a senha não são verificados: preencha os campos para entrar.
-            </p>
+          <p id="mensagem" role="status" aria-live="polite"></p>
+        </form>
 
-            <p class="login-troca">
-                É cliente? <a href="loginCliente.html">Entre aqui</a>
-            </p>
-        </section>
+        <p class="login-troca">
+          Ainda não possui conta?
+          <a href="profissional/cadastro.html">Cadastre-se</a>
+        </p>
+
+        <script type="module" src="profissional/js/autenticacao.js"></script>
+
+        <p class="nota">
+          <strong>Acesso de demonstração.</strong>
+          Nesta versão do protótipo o e-mail e a senha não são verificados:
+          preencha os campos para entrar.
+        </p>
+
+        <p class="login-troca">
+          É cliente? <a href="loginCliente.html">Entre aqui</a>
+        </p>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
+      <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
     </footer>
-</body>
+  </body>
 </html>

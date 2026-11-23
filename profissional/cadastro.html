@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de profissional | ObraLink</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="icones/favicon-32x32.png">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="logo">
+            <img src="icones/logo.png" alt="Logotipo do ObraLink">
+            <h1>ObraLink</h1>
+        </a>
+
+        <nav aria-label="Navegação principal">
+            <a href="../loginproficional.html" class="link">Voltar</a>
+        </nav>
+    </header>
+
+    <main class="login">
+        <section class="login-card" aria-labelledby="titulo-cadastro">
+
+            <div>
+                <h2 id="titulo-cadastro">Criar conta profissional</h2>
+                <p class="lead">
+                    Cadastre-se para divulgar seus serviços e gerenciar seus clientes.
+                </p>
+            </div>
+
+            <form class="formulario" id="formCadastro">
+
+                <label for="nome">Nome completo</label>
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Digite seu nome completo"
+                    autocomplete="name"
+                    minlength="3"
+                    required
+                >
+
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="voce@exemplo.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="telefone">Telefone</label>
+                <input
+                    type="tel"
+                    id="telefone"
+                    placeholder="(75) 99999-9999"
+                    autocomplete="tel"
+                    required
+                >
+
+                <label for="especialidade">Especialidade</label>
+                <select id="especialidade" required>
+                    <option value="">Selecione sua especialidade</option>
+                    <option value="Pedreiro">Pedreiro</option>
+                    <option value="Eletricista">Eletricista</option>
+                    <option value="Encanador">Encanador</option>
+                    <option value="Pintor">Pintor</option>
+                    <option value="Carpinteiro">Carpinteiro</option>
+                    <option value="Azulejista">Azulejista</option>
+                    <option value="Gesseiro">Gesseiro</option>
+                    <option value="Engenheiro">Engenheiro</option>
+                    <option value="Arquiteto">Arquiteto</option>
+                    <option value="Outro">Outro</option>
+                </select>
+
+                <label for="senha">Senha</label>
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Crie uma senha"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input
+                    type="password"
+                    id="confirmarSenha"
+                    placeholder="Digite a senha novamente"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit" class="btn" id="btnCadastrar">
+                    Criar conta
+                </button>
+
+                <p id="mensagem" role="status" aria-live="polite"></p>
+
+            </form>
+
+            <p class="login-troca">
+                Já possui uma conta?
+                <a href="../loginproficional.html">Entrar</a>
+            </p>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ObraLink. Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="js/autenticacao.js"></script>
+
+</body>
+</html>
